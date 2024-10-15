@@ -10,10 +10,14 @@ class MainActivity : AppCompatActivity() {
 
         // Fetch images into IntArray called imageArray
         val typedArray = resources.obtainTypedArray(R.array.image_ids)
-        val imageArray = IntArray(typedArray.length()) {typedArray.getResourceId(it, 0)}
-        typedArray.recycle()
+        val imageArray = resources.getIntArray(R.array.image_ids)
+
 
         // Attach an instance of ImageDisplayFragment using factory method
-
-    }
+        val fragment = ImageDisplayFragment.newInstance(imageArray)
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragmentContainerView, fragment)
+            .commit()
+        }
 }
